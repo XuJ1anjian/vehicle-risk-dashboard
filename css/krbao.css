@@ -1,0 +1,857 @@
+:root {
+  font-size: 16px;
+  background-color: #011f39;
+  --theme-yellow: #ff9900;
+  --theme-red: #ff3300;
+  --theme-grey: #aaa;
+  --theme-cyan: #05f5fe;
+  --theme-blue: #3c98fb;
+  --theme-pink: #ec808d;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  width: 100%;
+  height: 67.5rem;
+  background: linear-gradient(0deg, #011f39, #011327);
+  background-size: cover;
+  color: #fff;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: normal;
+}
+
+h1 {
+  position: relative;
+  padding-top: 0.125rem;
+  height: 7.75rem;
+  max-width: 120rem;
+  text-align: center;
+  line-height: 7.75rem;
+  letter-spacing: 0.5625rem;
+  background: url(../images/title_border.png) center no-repeat;
+  background-size: contain;
+}
+
+h1::after {
+  position: absolute;
+  top: 1.875rem;
+  left: calc(50% - 16.1875rem);
+  content: "";
+  width: 32.375rem;
+  height: 4.125rem;
+  background: url(../images/u663.svg) center no-repeat;
+  background-size: contain;
+  opacity: 0.1;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+main {
+  margin: auto;
+  padding: 0 1.5625rem;
+  height: calc(100% - 7.75rem);
+  overflow: hidden;
+}
+
+#left,
+#right {
+  flex: 1;
+}
+
+#center {
+  padding: 0 1.25rem;
+  flex: 1.6;
+}
+
+section {
+  position: relative;
+  margin-bottom: 1.25rem;
+  width: 100%;
+  background-color: #062a43;
+}
+
+/* section:after {
+  position: absolute;
+  top: -0.1875rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  background: url(../images/section_border.png) center no-repeat;
+} */
+
+#left section {
+  flex: 1;
+  height: 18.5625rem;
+  width: 32.3125rem;
+}
+
+#center section {
+  width: 50.0625rem;
+}
+
+#right section {
+  width: 32.3125rem;
+}
+
+section .content {
+  height: calc(100% - 3.375rem);
+}
+
+section h2 {
+  position: relative;
+  margin-bottom: 0.75rem;
+  padding-top: 0.5625rem;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+section h2:after {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 3.25rem);
+  content: "";
+  height: 0.125rem;
+  width: 6.375rem;
+  background: url(../images/1711434634561.jpg) center no-repeat;
+  background-size: contain;
+}
+
+/* 异常监控 Start */
+#abnormalMonitoring .content {
+  padding: 0.3125rem 1.9375rem 2.4375rem 2.9375rem;
+  row-gap: 2.5rem;
+}
+
+.am-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.875rem;
+  height: 5rem;
+  width: 5rem;
+  background: url(../images/1.png) center no-repeat;
+  background-size: contain;
+}
+
+.am-icon img {
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: contain;
+}
+
+.am-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.am-info p {
+  font-size: 2.25rem;
+  line-height: 2.625rem;
+}
+
+.am-info h3 {
+  font-size: 1.25rem;
+}
+
+.ani-flipping {
+  animation: iconFlipping 2s ease-in-out infinite;
+}
+
+.ani-flashing {
+  animation: iconFlashing 2s ease-in-out infinite;
+}
+
+.ani-rotate {
+  animation: iconRotate 1s linear infinite;
+}
+
+@keyframes iconFlipping {
+  0% {
+    transform: rotateX(0);
+  }
+  25% {
+    transform: rotateX(90deg);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  75% {
+    transform: rotateX(0);
+  }
+}
+
+@keyframes iconFlashing {
+  0% {
+    opacity: 1;
+  }
+  12.5% {
+    opacity: 0.5;
+  }
+  25% {
+    opacity: 1;
+  }
+  37.5% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  62.5% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 1;
+  }
+  87.5% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes iconRotate {
+  0% {
+    transform: rotateZ(0);
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.75;
+  }
+  50% {
+    transform: rotateZ(45deg);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: rotateZ(90deg);
+    opacity: 1;
+  }
+}
+/* 异常监控 End */
+
+/* 异常车辆监测 Start */
+#dataBit {
+  padding: 0 1.9375rem 1.5rem 2.0625rem;
+}
+
+.databit-header {
+  display: flex;
+  position: relative;
+  padding: 0.25rem 0.625rem 0.4375rem;
+  font-weight: bold;
+  line-height: 1;
+  text-align: center;
+}
+
+.databit-header li:first-child {
+  width: 6.625rem;
+}
+
+.databit-header li:nth-child(2) {
+  width: 7.1875rem;
+}
+
+.databit-header li:nth-child(3) {
+  margin: 0 0.625rem;
+  width: 12rem;
+}
+
+.databit-wrapper {
+  padding: 0 0.625rem;
+  margin-top: 0.1875rem;
+  overflow-y: auto;
+  height: calc(100% - 1.6875rem);
+  pointer-events: none;
+}
+
+.databit-list {
+  animation: databitScroll 7s linear infinite;
+}
+
+.databit-list li {
+  display: flex;
+  margin: 0.3125rem 0;
+  height: 1.625rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  line-height: 2;
+  background-color: #09264b;
+  border-radius: 0.8125rem;
+}
+
+.ex-type {
+  width: 6.625rem;
+}
+
+.ex-type span {
+  display: inline-block;
+  height: 1.25rem;
+  width: 4.375rem;
+  line-height: 1.25rem;
+  border-radius: 0.3125rem;
+}
+
+.ex-time {
+  width: 7.1875rem;
+}
+
+.ex-location {
+  margin: 0 0.625rem;
+  width: 12rem;
+  overflow: hidden;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@keyframes databitScroll {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+/* 异常车辆监测 End */
+
+/* 7日异常信息统计 Start */
+#abnormalChart {
+  padding-bottom: 0.6875rem;
+  width: 100%;
+  height: 100%;
+}
+/* 7日异常信息统计 End */
+
+/* 全国车辆分布 Start */
+#distribution {
+  height: 38.5625rem;
+}
+
+.overview {
+  display: inline-block;
+  position: absolute;
+  bottom: 3.125rem;
+  left: 2.5rem;
+  min-width: 15.625rem;
+}
+
+.ov-item {
+  display: flex;
+  align-items: baseline;
+  height: 2rem;
+  font-size: 0.875rem;
+}
+
+.ov-item:first-child {
+  margin-bottom: 1.9375rem;
+}
+
+.normal {
+  --icon-color: #f2c332;
+}
+
+.abnormal {
+  --icon-color: #d10721;
+}
+
+.ov-icon {
+  position: relative;
+  margin-right: 0.6875rem;
+  height: 1.25rem;
+  width: 1.25rem;
+  border: 1px solid var(--icon-color);
+  border-radius: 50%;
+}
+
+.ov-icon::before {
+  position: absolute;
+  top: calc(50% - 0.3125rem);
+  left: calc(50% - 0.3125rem);
+  content: "";
+  height: 0.625rem;
+  width: 0.625rem;
+  box-sizing: border-box;
+  border: 1px solid var(--icon-color);
+  border-radius: 50%;
+}
+
+.ov-icon::after {
+  position: absolute;
+  top: calc(50% - 0.0625rem);
+  left: calc(50% - 0.0625rem);
+  content: "";
+  height: 0.125rem;
+  width: 0.125rem;
+  box-sizing: border-box;
+  border: 1px solid var(--icon-color);
+  border-radius: 50%;
+}
+
+.ov-item .value {
+  flex: 1;
+  padding: 0 1.75rem 0 2rem;
+  color: var(--icon-color);
+  font-size: 1.75rem;
+}
+
+.abnormal .value {
+  animation: warning 1s linear infinite;
+  /* text-shadow: 0px 0px 10px var(--icon-color);  */
+}
+
+@keyframes warning {
+  0% {
+    text-shadow: none;
+  }
+  50% {
+    text-shadow: 0.0625rem 0.0313rem 0 var(--icon-color);
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+/* 全国车辆分布 End */
+
+/* 30日内车辆入库/结清数 Start */
+#settlement {
+  height: 18.6875rem;
+}
+
+#curveChart {
+  padding-bottom: 0.6875rem;
+  width: 100%;
+  height: 100%;
+}
+/* 30日内车辆入库/结清数 End */
+
+/* 数据概览 Start */
+#dataOverview {
+  height: 12.6875rem;
+}
+
+#dataOverview h3 {
+  font-size: 1rem;
+}
+
+.do-item {
+  padding-left: 2.3125rem;
+  height: 7.375rem;
+}
+
+.do-info span {
+  padding-right: 0.375rem;
+  color: #06faac;
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.do-icon {
+  position: relative;
+  margin-right: 2.1875rem;
+  width: 5.375rem;
+  height: 100%;
+  background-color: rgba(10, 27, 36, 0.5);
+  box-shadow: inset 0 0 0.3125rem 0.25rem rgba(102, 255, 255, 0.25);
+  border-radius: 0.625rem;
+}
+
+.do-icon img {
+  position: absolute;
+  left: calc(50% - 1.875rem);
+  top: calc(50% - 1.875rem);
+  height: 3.75rem;
+  width: 3.75rem;
+}
+
+.do-icon .data-ring {
+  animation: rotate 8s linear infinite;
+}
+
+.do-icon .data-ring.reversed {
+  animation: rotateReversed 8s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateReversed {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+/* 数据概览 End */
+
+/* 电源监控 Start */
+#powerMonitor {
+  height: 21rem;
+}
+
+#powerMonitor .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2.1875rem;
+  height: calc(100% - 7.125rem);
+}
+
+.pm-row {
+  padding: 0 1rem 0 1.25rem;
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1rem;
+}
+
+.pm-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3.75rem;
+  width: 3.75rem;
+  background: url(../images/3_2x.png) center no-repeat;
+  background-size: cover;
+}
+
+.pm-icon img {
+  height: 1.875rem;
+  width: 1.875rem;
+}
+
+.pm-icon .smaller {
+  height: 1.5625rem;
+  width: 1.5625rem;
+}
+
+.pm-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0.625rem;
+}
+
+.pm-row h3 {
+  font-size: 0.875rem;
+}
+
+.pm-row p {
+  margin-top: 0.4375rem;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  font-weight: bold;
+}
+/* 电源监控 End */
+
+/* 车辆监管时长概况 Start */
+#monitorDuration {
+  height: 22.375rem;
+}
+
+#monitorDuration .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 4.0625rem);
+}
+
+.md-row {
+  padding: 0 2.5625rem;
+}
+
+.md-item {
+  flex: 1;
+}
+
+.md-item h3 {
+  height: 2.125rem;
+  width: 100%;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 2.125rem;
+  background: url(../images/u1242.png) center no-repeat;
+  background-size: contain;
+}
+
+.md-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.4375rem;
+}
+
+.details-graph {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.4375rem;
+  height: 4.4375rem;
+  border-radius: 50%;
+  background: conic-gradient(
+    #0191ad 0%,
+    #01bdd8 12.5%,
+    #01cae9 25%,
+    #00ddff 37.5%,
+    transparent 37.5%,
+    transparent 62.5%,
+    #026783 62.5%,
+    #025975 75%,
+    #026985 87.5%,
+    #0191ad 100%
+  );
+}
+
+.details-graph::before {
+  position: absolute;
+  bottom: 0.1875rem;
+  z-index: 2;
+  content: "";
+  width: 2.8125rem;
+  height: 0.5625rem;
+  background: url(../images/u1274.svg) center no-repeat;
+  background-size: contain;
+}
+
+.details-graph::after {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  content: "";
+  width: 2.8125rem;
+  height: 0.1875rem;
+  background-color: #014c78;
+}
+
+.details-graph.right {
+  background: conic-gradient(
+    #03a989 0%,
+    #03ec9c 25%,
+    #00f5a3 37.5%,
+    transparent 37.5%,
+    transparent 62.5%,
+    #03747b 62.5%,
+    #036878 75%,
+    #03787c 87.5%,
+    #03a989 100%
+  );
+}
+
+.empty-bar {
+  position: absolute;
+  top: -0.0625rem;
+  right: -0.0625rem;
+  bottom: -0.0625rem;
+  left: -0.0625rem;
+  border-radius: 50%;
+  transform: rotateZ(-135deg);
+}
+
+.graph-mask {
+  position: relative;
+  z-index: 99;
+  height: 3.125rem;
+  width: 3.125rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 2.6875rem;
+  text-align: center;
+  border-radius: 50%;
+  background: linear-gradient(0deg, #06273d, #06283f);
+}
+
+.graph-mask .count {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  color: #fff;
+  font-size: 0.875rem;
+  line-height: 1rem;
+}
+
+.md-item:nth-child(odd) .graph-mask {
+  color: #5deaec;
+}
+
+.md-item:nth-child(even) .graph-mask {
+  color: #66ff99;
+}
+
+.details-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.625rem 0.75rem;
+  margin-left: 1rem;
+  width: 6.625rem;
+  height: 4.375rem;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  box-shadow: inset 0 0 0.625rem 0.25rem rgba(102, 255, 255, 0.25);
+  background-color: #06283e;
+}
+
+.details-info p {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 1rem;
+}
+
+.details-info .value {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.details-info p:first-child .value {
+  color: #06faac;
+}
+
+.details-info p:last-child .value {
+  color: #ffcc00;
+}
+/* 车辆监管时长概况 End */
+
+/* 弹性盒子布局公共样式 Start */
+.flex {
+  display: flex;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.jc-c {
+  justify-content: center;
+}
+
+.ai-c {
+  align-items: center;
+}
+
+.fd-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+/* 弹性盒子布局公共样式 End */
+
+/* 通用文字颜色 Start */
+.yellow {
+  color: var(--theme-yellow);
+}
+
+.yellow-bubble {
+  background-color: #f59a23;
+}
+
+.red {
+  color: var(--theme-red);
+}
+
+.red-bubble {
+  background-color: #d9001b;
+}
+
+.grey {
+  color: var(--theme-grey);
+}
+
+.grey-bubble {
+  background-color: #7f7f7f;
+}
+
+.cyan {
+  color: var(--theme-cyan);
+}
+
+.cyan-bubble {
+  background-color: #00bfbf;
+}
+
+.blue {
+  color: var(--theme-blue);
+}
+
+.blue-bubble {
+  background-color: var(--theme-blue);
+}
+
+.pink {
+  color: var(--theme-pink);
+}
+
+.pink-bubble {
+  background-color: var(--theme-pink);
+}
+/* 通用文字颜色 End */
+
+/* 分割线 Start */
+.seperate {
+  position: relative;
+  margin: 0 auto;
+  height: 0.0625rem;
+  width: 25.6875rem;
+  background: #03539e;
+}
+
+.seperate::before {
+  position: absolute;
+  left: -0.75rem;
+  top: -0.0625rem;
+  content: "";
+  height: 0.1875rem;
+  width: 0.625rem;
+  border-radius: 0.0938rem;
+  background-color: #fff;
+}
+
+.seperate::after {
+  position: absolute;
+  right: -0.75rem;
+  top: -0.0625rem;
+  content: "";
+  height: 0.1875rem;
+  width: 0.625rem;
+  border-radius: 0.0938rem;
+  background-color: #fff;
+}
+/* 分割线 End */

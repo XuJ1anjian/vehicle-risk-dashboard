@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>车辆风控看板</title>
+    <link rel="stylesheet" href="./css/krbao.css" />
+    <script src="./js/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="./js/china.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>车辆风控看板</h1>
+    </header>
+    <main class="flex">
+      <div id="left" class="flex fd-col jc-sb">
+        <section id="abnormalMonitoring">
+          <h2>异 常 监 控</h2>
+          <div class="content flex flex-wrap jc-sb">
+            <div class="am-item flex">
+              <div class="am-icon">
+                <img
+                  class="ani-flipping"
+                  src="./images/u1133.png"
+                  alt="车辆出库"
+                />
+              </div>
+              <div class="am-info">
+                <p class="yellow">159</p>
+                <h3>车辆出库</h3>
+              </div>
+            </div>
+            <div class="am-item flex">
+              <div class="am-icon">
+                <img
+                  class="ani-flashing"
+                  src="./images/u1157.png"
+                  alt="异常拔出"
+                />
+              </div>
+              <div class="am-info">
+                <p class="red">25</p>
+                <h3>异常拔出</h3>
+              </div>
+            </div>
+            <div class="am-item flex">
+              <div class="am-icon">
+                <img src="./images/u1109.png" alt="车辆离线" />
+              </div>
+              <div class="am-info">
+                <p class="grey">520</p>
+                <h3>车辆离线</h3>
+              </div>
+            </div>
+            <div class="am-item flex">
+              <div class="am-icon">
+                <img
+                  class="ani-rotate"
+                  src="./images/u1109.png"
+                  alt="采集失败"
+                />
+              </div>
+              <div class="am-info">
+                <p class="cyan">223</p>
+                <h3>采集失败</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>异常车辆监测</h2>
+          <div class="content" id="dataBit">
+            <ul class="databit-header">
+              <li>类型</li>
+              <li>时间</li>
+              <li>地点</li>
+            </ul>
+            <div class="seperate"></div>
+            <div class="databit-wrapper">
+              <ul class="databit-list">
+                <li>
+                  <div class="ex-type">
+                    <span class="yellow-bubble">车辆出库</span>
+                  </div>
+                  <div class="ex-time">2023-12-05 19:08</div>
+                  <div class="ex-location">人民大街与惠民路交汇159号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="grey-bubble">设备离线</span>
+                  </div>
+                  <div class="ex-time">2023-12-06 06:58</div>
+                  <div class="ex-location">安岭路金海湾财富中心1号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="cyan-bubble">采集失败</span>
+                  </div>
+                  <div class="ex-time">2023-12-08 11:01</div>
+                  <div class="ex-location">厦门市湖里区板尚路723号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="red-bubble">异常拔出</span>
+                  </div>
+                  <div class="ex-time">2023-12-08 13:21</div>
+                  <div class="ex-location">湖里区火炬高新区创新路2号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="grey-bubble">设备离线</span>
+                  </div>
+                  <div class="ex-time">2023-12-08 17:30</div>
+                  <div class="ex-location">厦门市湖里区仙岳路1279-33号附近</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="grey-bubble">设备离线</span>
+                  </div>
+                  <div class="ex-time">2023-12-08 17:42</div>
+                  <div class="ex-location">厦门市思明区禾祥西路909号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="grey-bubble">设备离线</span>
+                  </div>
+                  <div class="ex-time">2023-12-09 01:38</div>
+                  <div class="ex-location">厦门市海沧区新阳北路777号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="cyan-bubble">采集失败</span>
+                  </div>
+                  <div class="ex-time">2023-12-09 05:17</div>
+                  <div class="ex-location">厦门市海沧区古楼东坑路8-10</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="yellow-bubble">车辆出库</span>
+                  </div>
+                  <div class="ex-time">2023-12-09 09:28</div>
+                  <div class="ex-location">厦门汉丰医药有限公司西110米</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="yellow-bubble">车辆出库</span>
+                  </div>
+                  <div class="ex-time">2023-12-09 11:25</div>
+                  <div class="ex-location">
+                    厦门金龙联合汽车工业有限公司（金龙路）
+                  </div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="cyan-bubble">采集失败</span>
+                  </div>
+                  <div class="ex-time">2023-12-09 12:18</div>
+                  <div class="ex-location">厦门市集美区杏林北二路22号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="grey-bubble">设备离线</span>
+                  </div>
+                  <div class="ex-time">2023-12-09 16:01</div>
+                  <div class="ex-location">厦门市集美区九天湖五里86号</div>
+                </li>
+                <li>
+                  <div class="ex-type">
+                    <span class="red-bubble">异常拔出</span>
+                  </div>
+                  <div class="ex-time">2023-12-10 08:03</div>
+                  <div class="ex-location">
+                    厦门市集美区海翔大道白石二里28-1号
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>7日异常信息统计</h2>
+          <div class="content" id="abnormalChart"></div>
+        </section>
+      </div>
+      <div id="center" class="flex fd-col jc-sb">
+        <section id="distribution">
+          <h2>全 国 车 辆 分 布</h2>
+          <div class="content">
+            <ul class="overview">
+              <li class="ov-item normal">
+                <div class="ov-icon"></div>
+                <span class="label">正常车辆:</span>
+                <b class="value">255245</b>
+                <span class="unit">辆</span>
+              </li>
+              <li class="ov-item abnormal">
+                <div class="ov-icon"></div>
+                <span class="label">异常车辆:</span>
+                <b class="value">64</b>
+                <span class="unit">辆</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section id="settlement">
+          <h2>30日内车辆入库/结清数</h2>
+          <div class="content" id="curveChart"></div>
+        </section>
+      </div>
+      <div id="right" class="flex fd-col">
+        <section id="dataOverview">
+          <h2>数 据 概 览</h2>
+          <div class="content flex">
+            <!-- 设备总数 -->
+            <div class="do-item flex ai-c devices">
+              <div class="do-icon">
+                <img
+                  src="./images/data_ring.svg"
+                  alt="data ring"
+                  class="data-ring"
+                />
+                <img src="./images/data_1.svg" alt="data" />
+              </div>
+              <div class="do-info">
+                <p><span id="devicesCount">1000</span>个</p>
+                <h3>设备总数</h3>
+              </div>
+            </div>
+            <!-- 车辆总数 -->
+            <div class="do-item flex ai-c vehicles">
+              <div class="do-icon">
+                <img
+                  src="./images/data_ring.svg"
+                  alt="data ring"
+                  class="data-ring reversed"
+                />
+                <img src="./images/data_1.svg" alt="data" />
+              </div>
+              <div class="do-info">
+                <p><span id="vehiclesCount">1000</span>个</p>
+                <h3>车辆总数</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="powerMonitor">
+          <h2>电 源 监 控</h2>
+          <div class="content">
+            <div class="pm-row flex jc-sb">
+              <div class="pm-item flex">
+                <div class="pm-icon">
+                  <img src="./images/dianyuan0.svg" alt="外部电源正常" />
+                </div>
+                <div class="pm-info">
+                  <p class="blue">25110</p>
+                  <h3>外部电瓶正常</h3>
+                </div>
+              </div>
+              <div class="pm-item flex">
+                <div class="pm-icon">
+                  <img src="./images/dianyuan1.svg" alt="外部电源欠压" />
+                </div>
+                <div class="pm-info">
+                  <p class="yellow">985</p>
+                  <h3>外部电瓶欠压</h3>
+                </div>
+              </div>
+              <div class="pm-item flex">
+                <div class="pm-icon">
+                  <img
+                    class="smaller"
+                    src="./images/dianyuan2.svg"
+                    alt="外部电源断开"
+                  />
+                </div>
+                <div class="pm-info">
+                  <p class="pink">211</p>
+                  <h3>外部电瓶断开</h3>
+                </div>
+              </div>
+            </div>
+            <div class="seperate"></div>
+            <div class="pm-row flex jc-sb">
+              <div class="pm-item flex">
+                <div class="pm-icon">
+                  <img src="./images/dianyuan3.svg" alt="内部电瓶正常" />
+                </div>
+                <div class="pm-info">
+                  <p class="blue">15803</p>
+                  <h3>内部电瓶正常</h3>
+                </div>
+              </div>
+              <div class="pm-item flex">
+                <div class="pm-icon">
+                  <img src="./images/dianyuan4.svg" alt="内部电瓶欠压" />
+                </div>
+                <div class="pm-info">
+                  <p class="yellow">1109</p>
+                  <h3>内部电瓶欠压</h3>
+                </div>
+              </div>
+              <div class="pm-item flex">
+                <div class="pm-icon">
+                  <img src="./images/dianyuan5.svg" alt="内部电瓶断开" />
+                </div>
+                <div class="pm-info">
+                  <p class="pink">387</p>
+                  <h3>内部电瓶断开</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="monitorDuration">
+          <h2>车辆监管时长概况</h2>
+          <div class="content">
+            <div class="md-row flex jc-c">
+              <div class="md-item">
+                <h3>监管0~30天</h3>
+                <div class="md-details" id="regChart1"></div>
+              </div>
+              <div class="md-item">
+                <h3>监管1~3个月</h3>
+                <div class="md-details" id="regChart2"></div>
+              </div>
+            </div>
+            <div class="seperate"></div>
+            <div class="md-row flex jc-c">
+              <div class="md-item">
+                <h3>监管3~6个月</h3>
+                <div class="md-details" id="regChart3"></div>
+              </div>
+              <div class="md-item">
+                <h3>监管半年以上</h3>
+                <div class="md-details" id="regChart4"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="./js/krbao.js"></script>
+  </body>
+</html>
