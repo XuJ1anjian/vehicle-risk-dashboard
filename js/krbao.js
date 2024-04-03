@@ -76,7 +76,9 @@
   abnormalChart.setOption(option);
 
   window.addEventListener("resize", function () {
-    abnormalChart.resize();
+    setTimeout(() => {
+      abnormalChart.resize();
+    }, 100);
   });
 })();
 
@@ -196,7 +198,231 @@
   curveChart.setOption(option);
 
   window.addEventListener("resize", function () {
-    curveChart.resize();
+    setTimeout(() => {
+      curveChart.resize();
+    }, 100);
+  });
+})();
+
+// 全国车辆分布地图
+(function () {
+  let mapContainer = document.getElementById("chinaMap");
+  let chinaMap = echarts.init(mapContainer);
+  const areaColor = {
+    type: "linear",
+    x: 0,
+    y: 0,
+    x2: 0,
+    y2: 1,
+    colorStops: [
+      {
+        offset: 0,
+        color: "#60F2F4", // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: "#0163F4", // 100% 处的颜色
+      },
+    ],
+  };
+  chinaMap.setOption({
+    geo: {
+      // 这个是重点配置区
+      map: "china", // 表示中国地图 名称来自china.js中注册的名称 echarts.registerMap("china", {]})
+      roam: false, // 是否允许鼠标缩放
+      zoom: 1.2, // 地图当前视角缩放比例
+      aspectScale: 0.8,
+      label: {
+        show: false, // 是否显示对应地名
+      },
+      itemStyle: {
+        normal: {
+          borderColor: "#5FF0F4", // 区域边框颜色
+          borderWidth: "1", // 区域边框粗细
+          // borderType: "dashed", // 区域边框类型
+          areaColor: "#0C1931",
+          shadowBlur: 10, // 地图发光特效
+          shadowColor: "rgba(97, 243, 244, 0.5)",
+        },
+        emphasis: {
+          areaColor,
+        },
+      },
+      select: {
+        label: {
+          show: false,
+        },
+        itemStyle: {
+          areaColor: "transparent",
+        },
+      },
+    },
+    series: [
+      {
+        name: "地点", // 浮动框的标题
+        type: "map",
+        geoIndex: 0,
+        selectedMode: "single",
+        data: [],
+      },
+      {
+        // 在地图上标记地点
+        type: "scatter",
+        coordinateSystem: "geo",
+        z: 10,
+        data: [
+          {
+            value: [116.46, 35.5],
+          },
+          {
+            value: [105, 34.25],
+          },
+          {
+            value: [95.8, 40.5],
+          },
+          {
+            value: [104, 28],
+          },
+          {
+            value: [101.25, 26.7],
+          },
+          {
+            value: [99.6, 25.23],
+          },
+          {
+            value: [102.24, 25.23],
+          },
+          {
+            value: [103.6, 25.23],
+          },
+          {
+            value: [102.88, 23.64],
+          },
+          {
+            value: [100.41, 23.72],
+          },
+          {
+            value: [100.71, 22.67],
+          },
+          {
+            value: [122.91, 52.48],
+          },
+          {
+            value: [121.98, 52.9],
+          },
+          {
+            value: [123.05, 52.95],
+          },
+          {
+            value: [125, 51.77],
+          },
+          {
+            value: [125.28, 52.2],
+          },
+          {
+            value: [124.23, 52.1],
+          },
+          {
+            value: [126.07, 49.18],
+          },
+          {
+            value: [126.2, 47.95],
+          },
+          {
+            value: [128.04, 48.51],
+          },
+          {
+            value: [124.11, 47.27],
+          },
+          {
+            value: [127.83, 47.72],
+          },
+          {
+            value: [126.18, 46.66],
+          },
+          {
+            value: [126.08, 46.56],
+          },
+          {
+            value: [128.18, 47.03],
+          },
+          {
+            value: [127.74, 46.92],
+          },
+          {
+            value: [128.18, 45.84],
+          },
+          {
+            value: [129.85, 46.14],
+          },
+          {
+            value: [129.83, 46.93],
+          },
+        ],
+        z: 10,
+        symbol:
+          "image://C:/Users/Administrator/Desktop/krbao/images/mark_yellow.svg",
+        // symbol: "circle",
+        symbolSize: 40, // 标记点大小
+        color: "#F0AE03", // 标记点颜色
+        itemStyle: {
+          shadowBlur: 0,
+          opacity: 1,
+        },
+        label: {
+          emphasis: {
+            show: false,
+          },
+        },
+        silent: true, // 图形是否不响应和触发鼠标事件 设置为true防止标记覆盖城市导致无法点击城市
+      },
+      {
+        // 在地图上标记地点
+        type: "scatter",
+        coordinateSystem: "geo",
+        data: [
+          {
+            value: [100.2, 25.92],
+          },
+          {
+            value: [100.3, 26.8],
+          },
+          {
+            value: [99.8, 26.8],
+          },
+        ],
+        symbol:
+          "image://C:/Users/Administrator/Desktop/krbao/images/mark_red.svg",
+        // symbol: "circle",
+        symbolSize: 40, // 标记点大小
+        color: "#D9001B", // 标记点颜色
+        z: 20,
+        itemStyle: {
+          shadowBlur: 0,
+          opacity: 1,
+        },
+        label: {
+          emphasis: {
+            show: false,
+          },
+        },
+        silent: true, // 图形是否不响应和触发鼠标事件 设置为true防止标记覆盖城市导致无法点击城市
+      },
+    ],
+  });
+  chinaMap.on("click", function (params) {
+    if (params.componentType === "series") {
+      if (params.seriesType === "map") {
+        var province = params.name;
+        // TODO: 根据省份名称加载相应的省份地图数据，并重新设置地图显示区域
+        console.log("您点击了" + province);
+      }
+    }
+  });
+  window.addEventListener("resize", function () {
+    this.setTimeout(() => {
+      chinaMap.resize();
+    }, 100);
   });
 })();
 
@@ -213,7 +439,6 @@ function regChart(el, options) {
     const isRight = this.options.isRight || false; // 左侧的图表进度条与右侧颜色区分 默认为左侧
     const normalColor = "#033550";
     const displayProgress = ((ocupancy / totalCount) * 75).toFixed(2) + "%"; // 实际展现出来的进度条长度比例 因为圆环实际长度只有75%
-    // const displayProgress = (1 - (ocupancy / totalCount)) * 75; // 实际展现出来的进度条长度比例 因为圆环实际长度只有75%
 
     // 图表结构字符串
     const chartDOM = `
@@ -269,7 +494,7 @@ $(function () {
   let databitRows = $(".databit-list").children("li").clone();
   $(".databit-list").append(databitRows);
 
-  // 监管0~30天图表  
+  // 监管0~30天图表
   const regChart1 = new regChart("#regChart1", {
     count: 128,
     totalCount: 951,
