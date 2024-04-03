@@ -361,7 +361,7 @@
         ],
         z: 10,
         symbol:
-          "image://C:/Users/Administrator/Desktop/krbao/images/mark_yellow.svg",
+          "image://images/mark_yellow.svg",
         // symbol: "circle",
         symbolSize: 40, // 标记点大小
         color: "#F0AE03", // 标记点颜色
@@ -392,7 +392,7 @@
           },
         ],
         symbol:
-          "image://C:/Users/Administrator/Desktop/krbao/images/mark_red.svg",
+          "image://images/mark_red.svg",
         // symbol: "circle",
         symbolSize: 40, // 标记点大小
         color: "#D9001B", // 标记点颜色
