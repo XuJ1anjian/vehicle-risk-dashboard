@@ -417,6 +417,7 @@
       }
     }
   });
+  chinaMap.resize();
   window.addEventListener("resize", function () {
     this.setTimeout(() => {
       chinaMap.resize();
@@ -465,6 +466,7 @@ function regChart(el, options) {
 $(function () {
   const baseFontSize = 16;
   const designWidth = 1920;
+  const windowWidth = $(window).width();
 
   function remResize() {
     const windowWidth =
@@ -478,6 +480,11 @@ $(function () {
   $(window).on("resize", function () {
     remResize();
   });
+
+  $("#abnormalChart>div, #chinaMap>div, #curveChart>div").css("zoom", windowWidth / designWidth);
+  $(window).one("resize", function() {
+    $("#abnormalChart>div, #chinaMap>div, #curveChart>div").css("zoom", "unset");
+  })
 
   // 设备总数/车辆总数数量变化
   let devicesCount = 1000; // 初始化设备总数
