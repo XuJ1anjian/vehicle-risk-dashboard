@@ -360,8 +360,7 @@
           },
         ],
         z: 10,
-        symbol:
-          "image://images/mark_yellow.svg",
+        symbol: "image://images/mark_yellow.svg",
         // symbol: "circle",
         symbolSize: 40, // 标记点大小
         color: "#F0AE03", // 标记点颜色
@@ -391,8 +390,7 @@
             value: [99.8, 26.8],
           },
         ],
-        symbol:
-          "image://images/mark_red.svg",
+        symbol: "image://images/mark_red.svg",
         // symbol: "circle",
         symbolSize: 40, // 标记点大小
         color: "#D9001B", // 标记点颜色
@@ -527,4 +525,44 @@ $(function () {
     isRight: true,
   });
   regChart4.init();
+
+  $("header").on("click", "#toggleBoard", function () {
+    var frame = $("html")[0];
+    if (frame.requestFullscreen) {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+        $(this).text("进入全屏> >");
+      } else {
+        frame.requestFullscreen();
+        $(this).text("收起看板> >");
+      }
+    } else if (frame.mozRequestFullScreen) {
+      /* Firefox */
+      if (document.mozFullScreenElement) {
+        document.mozCancelFullScreen();
+        $(this).text("进入全屏> >");
+      } else {
+        frame.mozRequestFullScreen();
+        $(this).text("收起看板> >");
+      }
+    } else if (frame.webkitRequestFullscreen) {
+      /* Chrome, Safari and Opera */
+      if (document.webkitFullscreenElement) {
+        document.webkitExitFullscreen();
+        $(this).text("进入全屏> >");
+      } else {
+        frame.webkitRequestFullscreen();
+        $(this).text("收起看板> >");
+      }
+    } else if (frame.msRequestFullscreen) {
+      /* IE/Edge */
+      if (document.msFullscreenElement) {
+        document.msExitFullscreen();
+        $(this).text("进入全屏> >");
+      } else {
+        frame.msRequestFullscreen();
+        $(this).text("收起看板> >");
+      }
+    }
+  });
 });

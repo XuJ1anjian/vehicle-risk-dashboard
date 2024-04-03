@@ -63,6 +63,25 @@ li {
   list-style: none;
 }
 
+header {
+  position: relative;
+}
+
+#toggleBoard {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: .125rem 1.25rem;
+  font-size: 1.125rem;
+  color: #ABC2D5;
+  font-weight: bold;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 main {
   margin: auto;
   padding: 0 1.5625rem;
