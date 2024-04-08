@@ -1,3 +1,22 @@
+/**
+ * 将rem和px单位数值互换
+ * @param {Number} remVal 需要转换的以rem作为单位的值
+ * @param {Boolean} toRem  转换方式 false:将rem转换成px true:将px转换成rem
+ * @param {Boolean} needUnit 返回值是否需要单位 如果为true 则返回带px单位的字符串
+ * @returns 
+ */
+$.unitConvert = (val, toRem, needUnit) => {
+  // 获取根元素的字体大小（font-size）
+  let rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+  let returnVal;
+  if (isNaN(val)) {
+    return val;
+  } else {
+    returnVal = toRem ? val / rootFontSize : val * rootFontSize;
+  }
+  return needUnit ? `${returnVal}${toRem ? 'rem' : 'px'}` : returnVal;
+}
+
 // 7日异常信息统计柱状图
 (function () {
   let abnormalContainer = document.getElementById("abnormalChart");
@@ -239,7 +258,6 @@
         normal: {
           borderColor: "#5FF0F4", // 区域边框颜色
           borderWidth: "1", // 区域边框粗细
-          // borderType: "dashed", // 区域边框类型
           areaColor: "#0C1931",
           shadowBlur: 10, // 地图发光特效
           shadowColor: "rgba(97, 243, 244, 0.5)",
@@ -361,7 +379,6 @@
         ],
         z: 10,
         symbol: "image://images/mark_yellow.svg",
-        // symbol: "circle",
         symbolSize: 40, // 标记点大小
         color: "#F0AE03", // 标记点颜色
         itemStyle: {
@@ -391,7 +408,6 @@
           },
         ],
         symbol: "image://images/mark_red.svg",
-        // symbol: "circle",
         symbolSize: 40, // 标记点大小
         color: "#D9001B", // 标记点颜色
         z: 20,
@@ -434,10 +450,11 @@ function regChart(el, options) {
     const count = this.options.count || 0;
     const totalCount = this.options.totalCount || 0; // 总数
     const ocupancy = this.options.ocupancy || 0; // 占用数
-    const proportion = ((ocupancy / totalCount) * 100).toFixed(2) + "%"; //占比
+    let _ratio = ocupancy / totalCount;
+    const proportion = (_ratio * 100).toFixed(2) + "%"; //占比
     const isRight = this.options.isRight || false; // 左侧的图表进度条与右侧颜色区分 默认为左侧
     const normalColor = "#033550";
-    const displayProgress = ((ocupancy / totalCount) * 75).toFixed(2) + "%"; // 实际展现出来的进度条长度比例 因为圆环实际长度只有75%
+    const displayProgress = (_ratio * 75).toFixed(2) + "%"; // 实际展现出来的进度条长度比例 因为圆环实际长度只有75%
 
     // 图表结构字符串
     const chartDOM = `

@@ -858,6 +858,10 @@ section h2::after {
   height: 1rem;
 }
 
+.details-info .label {
+  white-space: nowrap;
+}
+
 .details-info .value {
   font-size: 1rem;
   font-weight: bold;
