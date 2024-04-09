@@ -38,7 +38,7 @@ $.loadBdScript = (scriptId, url, callback) => {
     };
   }
   script.src = url;
-  script.id = scriptId;
+  script.id = `${scriptId}JS`;
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
@@ -551,7 +551,7 @@ function initMap(name) {
     // 全国地图 注册省份的点击事件
     map.on("click", function (params) {
       if (params.componentType === "series") {
-        if (params.seriesType === "map") {
+        if (params.seriesType === "map" && params.name != "台湾") {
           $("#back").show(); // 显示返回全国按钮
           var province = params.name;
           showProvince(province); // 根据省份名称加载相应的省份地图数据，并重新设置地图显示区域
@@ -578,13 +578,19 @@ function initMap(name) {
  */
 function showProvince(pName) {
   const fName = provinces[pName]; // 获取到需要引入的省份js名称
-  $.loadBdScript(
-    fName,
-    `http://localhost:5500/js/provinces/${fName}.js`,
-    function () {
-      initMap(pName);
-    }
-  );
+  if ($(`#${fName}JS`).length) {
+    // 如果已经引入过该省份的js 则直接加载地图
+    initMap(pName);
+  } else {
+    // 未引入该省份js 则先加载js
+    $.loadBdScript(
+      fName,
+      `http://localhost:5500/js/provinces/${fName}.js`,
+      function () {
+        initMap(pName);
+      }
+    );
+  }
 }
 
 // 根据窗口宽度设置根元素字体大小
