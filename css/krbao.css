@@ -229,6 +229,7 @@ section h2::after {
 }
 
 .ani-flashing {
+  margin-bottom: .5rem;
   animation: iconFlashing 2s ease-in-out infinite;
 }
 

@@ -3,19 +3,21 @@
  * @param {Number} remVal 需要转换的以rem作为单位的值
  * @param {Boolean} toRem  转换方式 false:将rem转换成px true:将px转换成rem
  * @param {Boolean} needUnit 返回值是否需要单位 如果为true 则返回带px单位的字符串
- * @returns 
+ * @returns
  */
 $.unitConvert = (val, toRem, needUnit) => {
   // 获取根元素的字体大小（font-size）
-  let rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+  let rootFontSize = parseFloat(
+    window.getComputedStyle(document.documentElement).fontSize
+  );
   let returnVal;
   if (isNaN(val)) {
     return val;
   } else {
     returnVal = toRem ? val / rootFontSize : val * rootFontSize;
   }
-  return needUnit ? `${returnVal}${toRem ? 'rem' : 'px'}` : returnVal;
-}
+  return needUnit ? `${returnVal}${toRem ? "rem" : "px"}` : returnVal;
+};
 
 // 7日异常信息统计柱状图
 (function () {
@@ -36,13 +38,13 @@ $.unitConvert = (val, toRem, needUnit) => {
     dataset: {
       source: [
         ["product", "车辆出库", "采集失败", "异常拔出"],
-        ["03/20", 43, 25, 33],
-        ["03/21", 34, 43, 15],
-        ["03/22", 6, 15, 12],
-        ["03/23", 15, 37, 3],
-        ["03/24", 20, 16, 9],
-        ["03/25", 31, 32, 10],
-        ["03/26", 12, 13, 9],
+        ["04/04", 43, 25, 33],
+        ["04/05", 34, 43, 15],
+        ["04/06", 6, 15, 12],
+        ["04/07", 15, 37, 3],
+        ["04/08", 20, 16, 9],
+        ["04/09", 31, 32, 10],
+        ["04/10", 12, 13, 9],
       ],
     },
     xAxis: {
@@ -131,37 +133,36 @@ $.unitConvert = (val, toRem, needUnit) => {
         type: "category",
         boundaryGap: false,
         data: [
-          "12/01",
-          "12/02",
-          "12/03",
-          "12/04",
-          "12/05",
-          "12/06",
-          "12/07",
-          "12/08",
-          "12/09",
-          "12/10",
-          "12/11",
-          "12/12",
-          "12/13",
-          "12/14",
-          "12/15",
-          "12/16",
-          "12/17",
-          "12/18",
-          "12/19",
-          "12/20",
-          "12/21",
-          "12/22",
-          "12/23",
-          "12/24",
-          "12/25",
-          "12/26",
-          "12/27",
-          "12/28",
-          "12/29",
-          "12/30",
-          "12/31",
+          "03/12",
+          "03/13",
+          "03/14",
+          "03/15",
+          "03/16",
+          "03/17",
+          "03/18",
+          "03/19",
+          "03/20",
+          "03/21",
+          "03/22",
+          "03/23",
+          "03/24",
+          "03/25",
+          "03/26",
+          "03/27",
+          "03/28",
+          "03/29",
+          "03/30",
+          "03/31",
+          "04/01",
+          "04/02",
+          "04/03",
+          "04/04",
+          "04/05",
+          "04/06",
+          "04/07",
+          "04/08",
+          "04/09",
+          "04/10",
         ],
       },
     ],
@@ -187,9 +188,9 @@ $.unitConvert = (val, toRem, needUnit) => {
         },
         smooth: true,
         data: [
-          82, 145, 185, 195, 179, 152, 125, 138, 142, 148, 150, 120, 157, 145,
-          140, 136, 130, 138, 145, 149, 155, 164, 173, 179, 183, 185, 186, 189,
-          195, 223, 250,
+          235, 216, 193, 195, 179, 152, 136, 138, 142, 148, 150, 153, 155, 149,
+          143, 136, 130, 138, 145, 149, 155, 164, 173, 179, 183, 185, 186, 189,
+          202, 223,
         ],
       },
       {
@@ -207,9 +208,9 @@ $.unitConvert = (val, toRem, needUnit) => {
         },
         smooth: true,
         data: [
-          151, 160, 174, 183, 192, 201, 213, 224, 234, 243, 252, 260, 269, 275,
-          271, 250, 211, 170, 153, 144, 140, 146, 150, 154, 156, 157, 152, 143,
-          126, 105, 80,
+          151, 160, 172, 183, 192, 202, 213, 224, 234, 238, 236, 231, 224, 216,
+          207, 198, 185, 170, 153, 144, 140, 146, 150, 154, 156, 157, 152, 143,
+          126, 105,
         ],
       },
     ],
@@ -285,132 +286,119 @@ $.unitConvert = (val, toRem, needUnit) => {
       },
       {
         // 在地图上标记地点
-        type: "scatter",
+        type: "effectScatter",
         coordinateSystem: "geo",
         z: 10,
         data: [
           {
-            value: [116.46, 35.5],
+            value: [116.46, 35.5, "normal"],
           },
           {
-            value: [105, 34.25],
+            value: [105, 34.25, "normal"],
           },
           {
-            value: [95.8, 40.5],
+            value: [95.8, 40.5, "normal"],
           },
           {
-            value: [104, 28],
+            value: [104, 28, "normal"],
           },
           {
-            value: [101.25, 26.7],
+            value: [101.25, 26.7, "normal"],
           },
           {
-            value: [99.6, 25.23],
+            value: [99.6, 25.23, "normal"],
           },
           {
-            value: [102.24, 25.23],
+            value: [102.24, 25.23, "normal"],
           },
           {
-            value: [103.6, 25.23],
+            value: [103.6, 25.23, "normal"],
           },
           {
-            value: [102.88, 23.64],
+            value: [102.88, 23.64, "normal"],
           },
           {
-            value: [100.41, 23.72],
+            value: [100.41, 23.72, "normal"],
           },
           {
-            value: [100.71, 22.67],
+            value: [100.71, 22.67, "normal"],
           },
           {
-            value: [122.91, 52.48],
+            value: [122.91, 52.48, "normal"],
           },
           {
-            value: [121.98, 52.9],
+            value: [121.98, 52.9, "normal"],
           },
           {
-            value: [123.05, 52.95],
+            value: [123.05, 52.95, "normal"],
           },
           {
-            value: [125, 51.77],
+            value: [125, 51.77, "normal"],
           },
           {
-            value: [125.28, 52.2],
+            value: [125.28, 52.2, "normal"],
           },
           {
-            value: [124.23, 52.1],
+            value: [124.23, 52.1, "normal"],
           },
           {
-            value: [126.07, 49.18],
+            value: [126.07, 49.18, "normal"],
           },
           {
-            value: [126.2, 47.95],
+            value: [126.2, 47.95, "normal"],
           },
           {
-            value: [128.04, 48.51],
+            value: [128.04, 48.51, "normal"],
           },
           {
-            value: [124.11, 47.27],
+            value: [124.11, 47.27, "normal"],
           },
           {
-            value: [127.83, 47.72],
+            value: [127.83, 47.72, "normal"],
           },
           {
-            value: [126.18, 46.66],
+            value: [126.18, 46.66, "normal"],
           },
           {
-            value: [126.08, 46.56],
+            value: [126.08, 46.56, "normal"],
           },
           {
-            value: [128.18, 47.03],
+            value: [128.18, 47.03, "normal"],
           },
           {
-            value: [127.74, 46.92],
+            value: [127.74, 46.92, "normal"],
           },
           {
-            value: [128.18, 45.84],
+            value: [128.18, 45.84, "normal"],
           },
           {
-            value: [129.85, 46.14],
+            value: [129.85, 46.14, "normal"],
           },
           {
-            value: [129.83, 46.93],
+            value: [129.83, 46.93, "normal"],
+          },
+          {
+            value: [100.2, 25.92, "abnormal"],
+          },
+          {
+            value: [100.3, 26.8, "abnormal"],
+          },
+          {
+            value: [99.8, 26.8, "abnormal"],
           },
         ],
-        z: 10,
-        symbol: "image://images/mark_yellow.svg",
-        symbolSize: 40, // 标记点大小
-        color: "#F0AE03", // 标记点颜色
-        itemStyle: {
-          shadowBlur: 0,
-          opacity: 1,
+        // symbol: "image://images/mark_yellow.svg",
+        symbol: function(i) {
+          return i[2] == "normal" ? "image://images/mark_yellow.svg" : "image://images/mark_red.svg";
         },
-        label: {
-          emphasis: {
-            show: false,
-          },
+        symbolSize: function(i) {
+          return i[2] == "normal" ? $.unitConvert(0.75) : $.unitConvert(1);
+        }, // 标记点大小
+        rippleEffect: {
+          number: 2,
+          period: 3,
+          scale: 3
         },
-        silent: true, // 图形是否不响应和触发鼠标事件 设置为true防止标记覆盖城市导致无法点击城市
-      },
-      {
-        // 在地图上标记地点
-        type: "scatter",
-        coordinateSystem: "geo",
-        data: [
-          {
-            value: [100.2, 25.92],
-          },
-          {
-            value: [100.3, 26.8],
-          },
-          {
-            value: [99.8, 26.8],
-          },
-        ],
-        symbol: "image://images/mark_red.svg",
-        symbolSize: 40, // 标记点大小
-        color: "#D9001B", // 标记点颜色
-        z: 20,
         itemStyle: {
           shadowBlur: 0,
           opacity: 1,
@@ -498,10 +486,16 @@ $(function () {
     remResize();
   });
 
-  $("#abnormalChart>div, #chinaMap>div, #curveChart>div").css("zoom", windowWidth / designWidth);
-  $(window).one("resize", function() {
-    $("#abnormalChart>div, #chinaMap>div, #curveChart>div").css("zoom", "unset");
-  })
+  $("#abnormalChart>div, #chinaMap>div, #curveChart>div").css(
+    "zoom",
+    windowWidth / designWidth
+  );
+  $(window).one("resize", function () {
+    $("#abnormalChart>div, #chinaMap>div, #curveChart>div").css(
+      "zoom",
+      "unset"
+    );
+  });
 
   // 设备总数/车辆总数数量变化
   let devicesCount = 1000; // 初始化设备总数
