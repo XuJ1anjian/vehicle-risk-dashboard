@@ -130,6 +130,9 @@ const cooData = [
     value: [128.18, 45.84, "normal"],
   },
   {
+    value: [109.844902, 19.0392, "normal"]
+  },
+  {
     value: [129.85, 46.14, "normal"],
   },
   {
@@ -529,14 +532,14 @@ function initMap(name) {
   };
   // 针对海南放大
   if (name == "海南") {
-    mapOption.series[0].center = [109.844902, 19.0392];
-    mapOption.series[0].layoutCenter = ["50%", "50%"];
-    mapOption.series[0].layoutSize = "300%";
+    mapOption.geo.center = [109.844902, 19.0392];
+    mapOption.geo.layoutCenter = ["50%", "50%"];
+    mapOption.geo.zoom = 5;
   } else {
     //非显示海南时，将设置的参数恢复默认值
-    mapOption.series[0].center = undefined;
-    mapOption.series[0].layoutCenter = undefined;
-    mapOption.series[0].layoutSize = undefined;
+    mapOption.geo.center = undefined;
+    mapOption.geo.layoutCenter = undefined;
+    mapOption.geo.layoutSize = undefined;
   }   
 
   map.setOption(mapOption);
