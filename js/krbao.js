@@ -19,6 +19,171 @@ $.unitConvert = (val, toRem, needUnit) => {
   return needUnit ? `${returnVal}${toRem ? "rem" : "px"}` : returnVal;
 };
 
+// 加载对应的JS
+$.loadBdScript = (scriptId, url, callback) => {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  if (script.readyState) {
+    //IE
+    script.onreadystatechange = function () {
+      if (script.readyState === "loaded" || script.readyState === "complete") {
+        script.onreadystatechange = null;
+        callback();
+      }
+    };
+  } else {
+    // Others
+    script.onload = function () {
+      callback();
+    };
+  }
+  script.src = url;
+  script.id = scriptId;
+  document.getElementsByTagName("head")[0].appendChild(script);
+};
+
+
+const baseFontSize = 16; // 标准设计稿的字体大小
+const designWidth = 1920; // 标准设计稿的视口宽度
+const windowWidth = $(window).width(); // 当前窗口视口宽度
+const mapContainer = document.getElementById("chinaMap"); // 地图显示容器
+const cooData = [
+  {
+    value: [116.46, 35.5, "normal"],
+  },
+  {
+    value: [105, 34.25, "normal"],
+  },
+  {
+    value: [95.8, 40.5, "normal"],
+  },
+  {
+    value: [104, 28, "normal"],
+  },
+  {
+    value: [101.25, 26.7, "normal"],
+  },
+  {
+    value: [99.6, 25.23, "normal"],
+  },
+  {
+    value: [102.24, 25.23, "normal"],
+  },
+  {
+    value: [103.6, 25.23, "normal"],
+  },
+  {
+    value: [102.88, 23.64, "normal"],
+  },
+  {
+    value: [100.41, 23.72, "normal"],
+  },
+  {
+    value: [100.71, 22.67, "normal"],
+  },
+  {
+    value: [122.91, 52.48, "normal"],
+  },
+  {
+    value: [121.98, 52.9, "normal"],
+  },
+  {
+    value: [123.05, 52.95, "normal"],
+  },
+  {
+    value: [125, 51.77, "normal"],
+  },
+  {
+    value: [125.28, 52.2, "normal"],
+  },
+  {
+    value: [124.23, 52.1, "normal"],
+  },
+  {
+    value: [126.07, 49.18, "normal"],
+  },
+  {
+    value: [126.2, 47.95, "normal"],
+  },
+  {
+    value: [128.04, 48.51, "normal"],
+  },
+  {
+    value: [124.11, 47.27, "normal"],
+  },
+  {
+    value: [127.83, 47.72, "normal"],
+  },
+  {
+    value: [126.18, 46.66, "normal"],
+  },
+  {
+    value: [126.08, 46.56, "normal"],
+  },
+  {
+    value: [128.18, 47.03, "normal"],
+  },
+  {
+    value: [127.74, 46.92, "normal"],
+  },
+  {
+    value: [128.18, 45.84, "normal"],
+  },
+  {
+    value: [129.85, 46.14, "normal"],
+  },
+  {
+    value: [129.83, 46.93, "normal"],
+  },
+  {
+    value: [100.2, 25.92, "abnormal"],
+  },
+  {
+    value: [100.3, 26.8, "abnormal"],
+  },
+  {
+    value: [99.8, 26.8, "abnormal"],
+  },
+];
+
+// 可用地图省份以及对应的拼音，引入js对应的名称，因缺少台湾、香港、澳门的地图js，所以不包括在内
+const provinces = {
+  安徽: "anhui",
+  // 澳门: "aomen",
+  北京: "beijing",
+  重庆: "chongqing",
+  福建: "fujian",
+  甘肃: "gansu",
+  广东: "guangdong",
+  广西: "guangxi",
+  贵州: "guizhou",
+  海南: "hainan",
+  河北: "hebei",
+  黑龙江: "heilongjiang",
+  河南: "henan",
+  湖北: "hubei",
+  湖南: "hunan",
+  江苏: "jiangsu",
+  江西: "jiangxi",
+  吉林: "jilin",
+  辽宁: "liaoning",
+  内蒙古: "neimenggu",
+  宁夏: "ningxia",
+  青海: "qinghai",
+  山东: "shandong",
+  上海: "shanghai",
+  山西: "shanxi",
+  陕西: "shanxi1",
+  四川: "sichuan",
+  // 台湾: "taiwan",
+  天津: "tianjin",
+  // 香港: "xianggang",
+  新疆: "xinjiang",
+  西藏: "xizang",
+  云南: "yunnan",
+  浙江: "zhejiang",
+};
+
 // 7日异常信息统计柱状图
 (function () {
   let abnormalContainer = document.getElementById("abnormalChart");
@@ -178,7 +343,7 @@ $.unitConvert = (val, toRem, needUnit) => {
         type: "line",
         areaStyle: {
           color: "#06FAAC",
-          opacity: 0.1,
+          opacity: 0.2,
         },
         itemStyle: {
           color: "#66FFFF",
@@ -198,7 +363,7 @@ $.unitConvert = (val, toRem, needUnit) => {
         type: "line",
         areaStyle: {
           color: "#05f5fe",
-          opacity: 0.1,
+          opacity: 0.2,
         },
         itemStyle: {
           color: "#04CC80",
@@ -226,207 +391,7 @@ $.unitConvert = (val, toRem, needUnit) => {
 
 // 全国车辆分布地图
 (function () {
-  let mapContainer = document.getElementById("chinaMap");
-  let chinaMap = echarts.init(mapContainer);
-  const areaColor = {
-    type: "linear",
-    x: 0,
-    y: 0,
-    x2: 0,
-    y2: 1,
-    colorStops: [
-      {
-        offset: 0,
-        color: "#60F2F4", // 0% 处的颜色
-      },
-      {
-        offset: 1,
-        color: "#0163F4", // 100% 处的颜色
-      },
-    ],
-  };
-  chinaMap.setOption({
-    geo: {
-      // 这个是重点配置区
-      map: "china", // 表示中国地图 名称来自china.js中注册的名称 echarts.registerMap("china", {]})
-      roam: false, // 是否允许鼠标缩放
-      zoom: 1.2, // 地图当前视角缩放比例
-      aspectScale: 0.8,
-      label: {
-        show: false, // 是否显示对应地名
-      },
-      itemStyle: {
-        normal: {
-          borderColor: "#5FF0F4", // 区域边框颜色
-          borderWidth: "1", // 区域边框粗细
-          areaColor: "#0C1931",
-          shadowBlur: 10, // 地图发光特效
-          shadowColor: "rgba(97, 243, 244, 0.5)",
-        },
-        emphasis: {
-          areaColor,
-        },
-      },
-      select: {
-        label: {
-          show: false,
-        },
-        itemStyle: {
-          areaColor: "transparent",
-        },
-      },
-    },
-    series: [
-      {
-        name: "地点", // 浮动框的标题
-        type: "map",
-        geoIndex: 0,
-        selectedMode: "single",
-        data: [],
-      },
-      {
-        // 在地图上标记地点
-        type: "effectScatter",
-        coordinateSystem: "geo",
-        z: 10,
-        data: [
-          {
-            value: [116.46, 35.5, "normal"],
-          },
-          {
-            value: [105, 34.25, "normal"],
-          },
-          {
-            value: [95.8, 40.5, "normal"],
-          },
-          {
-            value: [104, 28, "normal"],
-          },
-          {
-            value: [101.25, 26.7, "normal"],
-          },
-          {
-            value: [99.6, 25.23, "normal"],
-          },
-          {
-            value: [102.24, 25.23, "normal"],
-          },
-          {
-            value: [103.6, 25.23, "normal"],
-          },
-          {
-            value: [102.88, 23.64, "normal"],
-          },
-          {
-            value: [100.41, 23.72, "normal"],
-          },
-          {
-            value: [100.71, 22.67, "normal"],
-          },
-          {
-            value: [122.91, 52.48, "normal"],
-          },
-          {
-            value: [121.98, 52.9, "normal"],
-          },
-          {
-            value: [123.05, 52.95, "normal"],
-          },
-          {
-            value: [125, 51.77, "normal"],
-          },
-          {
-            value: [125.28, 52.2, "normal"],
-          },
-          {
-            value: [124.23, 52.1, "normal"],
-          },
-          {
-            value: [126.07, 49.18, "normal"],
-          },
-          {
-            value: [126.2, 47.95, "normal"],
-          },
-          {
-            value: [128.04, 48.51, "normal"],
-          },
-          {
-            value: [124.11, 47.27, "normal"],
-          },
-          {
-            value: [127.83, 47.72, "normal"],
-          },
-          {
-            value: [126.18, 46.66, "normal"],
-          },
-          {
-            value: [126.08, 46.56, "normal"],
-          },
-          {
-            value: [128.18, 47.03, "normal"],
-          },
-          {
-            value: [127.74, 46.92, "normal"],
-          },
-          {
-            value: [128.18, 45.84, "normal"],
-          },
-          {
-            value: [129.85, 46.14, "normal"],
-          },
-          {
-            value: [129.83, 46.93, "normal"],
-          },
-          {
-            value: [100.2, 25.92, "abnormal"],
-          },
-          {
-            value: [100.3, 26.8, "abnormal"],
-          },
-          {
-            value: [99.8, 26.8, "abnormal"],
-          },
-        ],
-        // symbol: "image://images/mark_yellow.svg",
-        symbol: function(i) {
-          return i[2] == "normal" ? "image://images/mark_yellow.svg" : "image://images/mark_red.svg";
-        },
-        symbolSize: function(i) {
-          return i[2] == "normal" ? $.unitConvert(0.75) : $.unitConvert(1);
-        }, // 标记点大小
-        rippleEffect: {
-          number: 2,
-          period: 3,
-          scale: 3
-        },
-        itemStyle: {
-          shadowBlur: 0,
-          opacity: 1,
-        },
-        label: {
-          emphasis: {
-            show: false,
-          },
-        },
-        silent: true, // 图形是否不响应和触发鼠标事件 设置为true防止标记覆盖城市导致无法点击城市
-      },
-    ],
-  });
-  chinaMap.on("click", function (params) {
-    if (params.componentType === "series") {
-      if (params.seriesType === "map") {
-        var province = params.name;
-        // TODO: 根据省份名称加载相应的省份地图数据，并重新设置地图显示区域
-        console.log("您点击了" + province);
-      }
-    }
-  });
-  chinaMap.resize();
-  window.addEventListener("resize", function () {
-    this.setTimeout(() => {
-      chinaMap.resize();
-    }, 100);
-  });
+  initMap("china");
 })();
 
 // 监管时长概况图表构造函数
@@ -468,18 +433,166 @@ function regChart(el, options) {
   };
 }
 
-$(function () {
-  const baseFontSize = 16;
-  const designWidth = 1920;
-  const windowWidth = $(window).width();
+/**
+ * echarts初始化显示地图方法
+ * @param {String} name 地图名称 全国地图传"china" 省市地图传拼音 山西"shanxi" 陕西"shanxi1"
+ */
+function initMap(name) {
+  let map = echarts.init(mapContainer);
+  const areaColor = {
+    type: "linear",
+    x: 0,
+    y: 0,
+    x2: 0,
+    y2: 1,
+    colorStops: [
+      {
+        offset: 0,
+        color: "#60F2F4", // 0% 处的颜色
+      },
+      {
+        offset: 1,
+        color: "#0163F4", // 100% 处的颜色
+      },
+    ],
+  }; // echarts配置项中渐变色的对象
+  let mapOption = {
+    geo: {
+      // 这个是重点配置区
+      map: name, // 表示中国地图 名称来自china.js中注册的名称 echarts.registerMap("china", {]})
+      roam: false, // 是否允许鼠标缩放
+      zoom: name == "china" ? 1.2 : 0.9, // 地图当前视角缩放比例
+      aspectScale: 0.8, // 地图长宽比
+      label: {
+        show: false, // 是否显示对应地名
+      },
+      itemStyle: {
+        normal: {
+          borderColor: "#5FF0F4", // 区域边框颜色
+          borderWidth: "1", // 区域边框粗细
+          areaColor: "#0C1931",
+          shadowBlur: 10, // 地图发光特效
+          shadowColor: "rgba(97, 243, 244, 0.5)",
+        },
+        emphasis: {
+          areaColor,
+        },
+      },
+      select: {
+        label: {
+          show: false, // 选择省市不显示名称
+        },
+        itemStyle: {
+          areaColor: "transparent", // 选择省市不显示区域颜色
+        },
+      },
+    },
+    series: [
+      {
+        name: "地点", // 浮动框的标题
+        type: "map",
+        geoIndex: 0,
+        selectedMode: "single",
+        data: [],
+      },
+      {
+        // 在地图上标记地点
+        type: "effectScatter",
+        coordinateSystem: "geo",
+        z: 10,
+        data: cooData,
+        symbol: function (i) {
+          return i[2] == "normal"
+            ? "image://images/mark_yellow.svg"
+            : "image://images/mark_red.svg";
+        }, // 根据数据是否为异常 采用不同的标记图标路径
+        symbolSize: function (i) {
+          return i[2] == "normal" ? $.unitConvert(0.75) : $.unitConvert(1);
+        }, // 标记点大小
+        rippleEffect: {
+          number: 2, // 涟漪的圈数
+          period: 3, // 涟漪的间隔
+          scale: 3, // 涟漪最大倍数
+        },
+        itemStyle: {
+          shadowBlur: 0,
+          opacity: 1,
+        },
+        label: {
+          emphasis: {
+            show: false,
+          },
+        },
+        silent: true, // 图形是否不响应和触发鼠标事件 设置为true防止标记覆盖城市导致无法点击城市
+      },
+    ],
+  };
+  // 针对海南放大
+  if (name == "海南") {
+    mapOption.series[0].center = [109.844902, 19.0392];
+    mapOption.series[0].layoutCenter = ["50%", "50%"];
+    mapOption.series[0].layoutSize = "300%";
+  } else {
+    //非显示海南时，将设置的参数恢复默认值
+    mapOption.series[0].center = undefined;
+    mapOption.series[0].layoutCenter = undefined;
+    mapOption.series[0].layoutSize = undefined;
+  }   
 
-  function remResize() {
-    const windowWidth =
-      window.innerWidth || document.documentElement.clientWidth; // 获取当前窗口的宽度
-    const fontSize = (windowWidth / designWidth) * baseFontSize; // 根根据当前窗口宽度计算根元素字体大小
-    document.documentElement.style.fontSize = `${fontSize}px`; // 设置根元素字体大小
+  map.setOption(mapOption);
+
+  // 默认不设置点击事件
+  map.off("click");
+
+  if (name == "china") {
+    // 全国地图 注册省份的点击事件
+    map.on("click", function (params) {
+      if (params.componentType === "series") {
+        if (params.seriesType === "map") {
+          $("#back").show(); // 显示返回全国按钮
+          var province = params.name;
+          showProvince(province); // 根据省份名称加载相应的省份地图数据，并重新设置地图显示区域
+        }
+      }
+    });
+  } else {
+    // 省市地图
+    map.on("dblclick", function () {
+      $("#back").trigger("click"); // 双击返回全国地图
+    });
   }
+  // map.resize();
+  $(window).on("resize", function () {
+    setTimeout(() => {
+      map.resize();
+    }, 100);
+  });
+}
 
+/**
+ * 展示指定的省份地图
+ * @param {String} pName 指定的省份名称
+ */
+function showProvince(pName) {
+  const fName = provinces[pName]; // 获取到需要引入的省份js名称
+  $.loadBdScript(
+    fName,
+    `http://localhost:5500/js/provinces/${fName}.js`,
+    function () {
+      initMap(pName);
+    }
+  );
+}
+
+// 根据窗口宽度设置根元素字体大小
+function remResize() {
+  const windowWidth =
+    window.innerWidth || document.documentElement.clientWidth; // 获取当前窗口的宽度
+  const fontSize = (windowWidth / designWidth) * baseFontSize; // 根根据当前窗口宽度计算根元素字体大小
+  document.documentElement.style.fontSize = `${fontSize}px`; // 设置根元素字体大小
+}
+
+$(function () {
   remResize();
   // 监听窗口大小变化 重设根元素字体大小
   $(window).on("resize", function () {
@@ -510,7 +623,7 @@ $(function () {
   let databitRows = $(".databit-list").children("li").clone();
   $(".databit-list").append(databitRows);
 
-  // 监管0~30天图表
+  // 实例化监管0~30天图表
   const regChart1 = new regChart("#regChart1", {
     count: 128,
     totalCount: 951,
@@ -518,7 +631,7 @@ $(function () {
   });
   regChart1.init();
 
-  // 监管1~3个月图表
+  // 实例化监管1~3个月图表
   const regChart2 = new regChart("#regChart2", {
     count: 128,
     totalCount: 951,
@@ -527,7 +640,7 @@ $(function () {
   });
   regChart2.init();
 
-  // 监管3~6个月图表
+  // 实例化监管3~6个月图表
   const regChart3 = new regChart("#regChart3", {
     count: 128,
     totalCount: 951,
@@ -535,7 +648,7 @@ $(function () {
   });
   regChart3.init();
 
-  // 监管半年以上图表
+  // 实例化监管半年以上图表
   const regChart4 = new regChart("#regChart4", {
     count: 128,
     totalCount: 951,
@@ -544,6 +657,7 @@ $(function () {
   });
   regChart4.init();
 
+  // 右上方进入全屏/收起看板按钮点击事件
   $("header").on("click", "#toggleBoard", function () {
     var frame = $("html")[0];
     if (frame.requestFullscreen) {
@@ -582,5 +696,11 @@ $(function () {
         $(this).text("收起看板> >");
       }
     }
+  });
+
+  // 地图上方的返回全国按钮点击事件
+  $("#distribution").on("click", "#back", function () {
+    $(this).hide();
+    initMap("china");
   });
 });
