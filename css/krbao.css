@@ -427,9 +427,9 @@ section h2::after {
   left: 0;
   right: 0;
   content: "";
-  height: 0.5rem;
+  height: .625rem;
   background: url(../images/map_border_top.png) center no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 #distribution::before {
@@ -499,7 +499,7 @@ section h2::after {
   margin-right: 0.6875rem;
   height: 1.25rem;
   width: 1.25rem;
-  border: 1px solid var(--icon-color);
+  border: .0625rem solid var(--icon-color);
   border-radius: 50%;
 }
 
@@ -511,7 +511,7 @@ section h2::after {
   height: 0.625rem;
   width: 0.625rem;
   box-sizing: border-box;
-  border: 1px solid var(--icon-color);
+  border: .0625rem solid var(--icon-color);
   border-radius: 50%;
 }
 
@@ -523,7 +523,7 @@ section h2::after {
   height: 0.125rem;
   width: 0.125rem;
   box-sizing: border-box;
-  border: 1px solid var(--icon-color);
+  border: .0625rem solid var(--icon-color);
   border-radius: 50%;
 }
 
@@ -536,7 +536,6 @@ section h2::after {
 
 .abnormal .value {
   animation: warning 1s linear infinite;
-  /* text-shadow: 0px 0px 10px var(--icon-color);  */
 }
 
 @keyframes warning {
@@ -571,7 +570,7 @@ section h2::after {
   content: "";
   height: 0.5rem;
   background: url(../images/curve_border_top.png) center no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 #settlement::before {

@@ -42,7 +42,6 @@ $.loadBdScript = (scriptId, url, callback) => {
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
-
 const baseFontSize = 16; // 标准设计稿的字体大小
 const designWidth = 1920; // 标准设计稿的视口宽度
 const windowWidth = $(window).width(); // 当前窗口视口宽度
@@ -585,7 +584,7 @@ function showProvince(pName) {
     // 未引入该省份js 则先加载js
     $.loadBdScript(
       fName,
-      `http://localhost:5500/js/provinces/${fName}.js`,
+      `js/provinces/${fName}.js`,
       function () {
         initMap(pName);
       }
